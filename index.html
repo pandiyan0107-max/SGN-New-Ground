@@ -1,0 +1,1438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SGN Football Ground – Community Initiative</title>
+
+<style>
+  /* ===== CSS VARIABLES ===== */
+  :root {
+    --green-dark:   #0a3d1f;
+    --green-mid:    #145a32;
+    --green-main:   #1e8449;
+    --green-light:  #27ae60;
+    --green-pale:   #d5f5e3;
+    --green-glow:   #52be80;
+    --gold:         #f1c40f;
+    --gold-dark:    #d4ac0d;
+    --bronze:       #cd7f32;
+    --silver:       #a8a9ad;
+    --white:        #ffffff;
+    --off-white:    #f9fdf9;
+    --text-dark:    #0d2e18;
+    --text-mid:     #2d5a3d;
+    --text-light:   #6a9a7a;
+    --shadow:       rgba(10, 61, 31, 0.18);
+    --radius:       16px;
+    --radius-sm:    8px;
+  }
+
+  /* ===== RESET & BASE ===== */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: auto; }
+  body {
+    font-family: 'DM Sans', 'Segoe UI', Arial, sans-serif;
+    background: var(--off-white);
+    color: var(--text-dark);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; text-decoration: none; }
+
+  /* ===== UTILITY ===== */
+  .container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+  .section { padding: 70px 0; }
+  .section-label {
+    font-family: 'Space Mono', 'Courier New', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--green-glow);
+    margin-bottom: 10px;
+  }
+  .section-title {
+    font-family: 'Bebas Neue', 'Arial Narrow', Arial, sans-serif;
+    font-size: clamp(2rem, 6vw, 3.2rem);
+    color: var(--green-dark);
+    line-height: 1.05;
+    margin-bottom: 18px;
+  }
+  .section-title span { color: var(--green-light); }
+  .divider {
+    width: 48px; height: 4px;
+    background: var(--green-light);
+    border-radius: 2px;
+    margin-bottom: 28px;
+  }
+
+  /* ===== NAVBAR ===== */
+  .navbar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+    background: #0a3d1f;
+    padding: 14px 20px;
+    display: flex; align-items: center; justify-content: space-between;
+    border-bottom: 1px solid rgba(82,190,128,0.2);
+  }
+  .nav-brand {
+    font-family: 'Bebas Neue', 'Arial Narrow', Arial, sans-serif;
+    font-size: 1.3rem;
+    color: var(--white);
+    letter-spacing: 1px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .nav-brand .ball { font-size: 1.4rem; }
+  .nav-cta {
+    background: var(--green-light);
+    color: var(--white);
+    padding: 8px 18px;
+    border-radius: 30px;
+    font-weight: 700;
+    font-size: 0.82rem;
+    transition: background 0.2s;
+  }
+  .nav-cta:hover { background: var(--green-glow); }
+
+  /* ===== HERO ===== */
+  .hero {
+    min-height: 100vh;
+    background:
+      linear-gradient(160deg, rgba(10,61,31,0.92) 0%, rgba(20,90,50,0.85) 60%, rgba(30,132,73,0.7) 100%),
+      url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600"><rect fill="%230a3d1f" width="900" height="600"/><rect fill="none" stroke="%23ffffff22" stroke-width="3" x="50" y="50" width="800" height="500"/><line stroke="%23ffffff22" stroke-width="2" x1="450" y1="50" x2="450" y2="550"/><circle fill="none" stroke="%23ffffff22" stroke-width="2" cx="450" cy="300" r="80"/><rect fill="none" stroke="%23ffffff33" stroke-width="3" x="50" y="170" width="120" height="160"/><rect fill="none" stroke="%23ffffff33" stroke-width="3" x="730" y="170" width="120" height="160"/><rect fill="none" stroke="%23ffffff22" stroke-width="2" x="50" y="210" width="60" height="80"/><rect fill="none" stroke="%23ffffff22" stroke-width="2" x="790" y="210" width="60" height="80"/><circle fill="%23ffffff22" cx="450" cy="300" r="8"/></svg>') center/cover no-repeat;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center;
+    padding: 100px 20px 60px;
+    position: relative;
+  }
+  .hero-badge {
+    background: rgba(82,190,128,0.25);
+    border: 1px solid rgba(82,190,128,0.5);
+    color: var(--green-glow);
+    font-family: 'Space Mono', 'Courier New', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 7px 18px;
+    border-radius: 30px;
+    margin-bottom: 24px;
+    display: inline-block;
+  }
+  .hero h1 {
+    font-family: 'Bebas Neue', 'Arial Narrow', Arial, sans-serif;
+    font-size: clamp(2.6rem, 10vw, 5.5rem);
+    color: var(--white);
+    line-height: 1;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+  }
+  .hero h1 span { color: var(--gold); }
+  .hero-sub {
+    font-size: clamp(1rem, 3vw, 1.25rem);
+    color: rgba(255,255,255,0.75);
+    max-width: 560px;
+    margin: 0 auto 10px;
+  }
+  .hero-location {
+    font-family: 'Space Mono', 'Courier New', monospace;
+    font-size: 0.78rem;
+    color: var(--green-glow);
+    letter-spacing: 0.1em;
+    margin-bottom: 36px;
+  }
+  .hero-location::before { content: '📍 '; }
+  .hero-stats {
+    display: flex; gap: 24px; flex-wrap: wrap; justify-content: center;
+    margin-bottom: 40px;
+  }
+  .hero-stat {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: var(--radius);
+    padding: 16px 24px;
+    text-align: center;
+  }
+  .hero-stat .val {
+    font-family: 'Bebas Neue', 'Arial Narrow', Arial, sans-serif;
+    font-size: 1.9rem;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .hero-stat .lbl {
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.6);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 4px;
+  }
+  .btn-primary {
+    background: var(--gold);
+    color: var(--green-dark);
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 15px 36px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: inline-block;
+    box-shadow: 0 6px 24px rgba(241,196,15,0.35);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(241,196,15,0.45); }
+  .hero-scroll {
+    position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
+    color: rgba(255,255,255,0.4);
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+  .hero-scroll::after { content: ' ↓'; }
+
+  /* ===== PITCH VISUAL ===== */
+  .pitch-section {
+    background: var(--green-dark);
+    padding: 50px 20px;
+    text-align: center;
+    overflow: hidden;
+  }
+  .pitch-wrap {
+    max-width: 700px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .pitch-svg-container {
+    width: 100%; border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    border: 3px solid rgba(82,190,128,0.3);
+  }
+  .pitch-caption {
+    margin-top: 18px;
+    font-family: 'Space Mono', 'Courier New', monospace;
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 0.1em;
+  }
+
+  /* ===== WHY SECTION ===== */
+  .why-section { background: var(--white); }
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    margin-top: 10px;
+  }
+  .why-card {
+    background: var(--off-white);
+    border: 1px solid var(--green-pale);
+    border-radius: var(--radius);
+    padding: 28px 24px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .why-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px var(--shadow); }
+  .why-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    background: var(--green-light);
+  }
+  .why-icon { font-size: 2.2rem; margin-bottom: 14px; }
+  .why-card h3 {
+    font-family: 'Bebas Neue', 'Arial Narrow', Arial, sans-serif;
+    font-size: 1.2rem;
+    color: var(--green-dark);
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+  }
+  .why-card p { font-size: 0.88rem; color: var(--text-mid); line-height: 1.6; }
+
+  /* ===== OVERVIEW SECTION ===== */
+  .overview-section { background: var(--green-dark); color: var(--white); }
+  .overview-section .section-title { color: var(--white); }
+  .overview-section .section-title span { color: var(--gold); }
+  .overview-section .section-label { color: var(--green-glow); }
+  .overview-section .divider { background: var(--gold); }
+  .scope-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+    gap: 16px;
+    margin-top: 10px;
+  }
+  .scope-item {
+    display: flex; align-items: flex-start; gap: 14px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: var(--radius-sm);
+    padding: 18px;
+  }
+  .scope-icon {
+    width: 40px; height: 40px; min-width: 40px;
+    background: rgba(82,190,128,0.15);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem;
+  }
+  .scope-item h4 { font-size: 0.92rem; font-weight: 600; color: var(--white); margin-bottom: 3px; }
+  .scope-item p { font-size: 0.8rem; color: rgba(255,255,255,0.55); }
+
+  /* ===== BUDGET SECTION ===== */
+  .budget-section { background: var(--off-white); }
+  .budget-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: 0 4px 20px var(--shadow);
+  }
+  .budget-table thead { background: var(--green-dark); color: var(--white); }
+  .budget-table th {
+    padding: 14px 18px;
+    text-align: left;
+    font-family: 'Space Mono', 'Courier New', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .budget-table td {
+    padding: 14px 18px;
+    font-size: 0.9rem;
+    border-bottom: 1px solid var(--green-pale);
+    vertical-align: top;
+  }
+  .budget-table tbody tr:last-child td { border-bottom: none; }
+  .budget-table tbody tr:nth-child(even) { background: rgba(30,132,73,0.04); }
+  .budget-table tfoot { background: var(--green-main); color: var(--white); }
+  .budget-table tfoot td { font-weight: 700; font-size: 0.95rem; }
+  .budget-badge {
+    display: inline-block;
+    background: var(--green-pale);
+    color: var(--green-dark);
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 4px;
+  }
+  .budget-note {
+    margin-top: 14px;
+    font-size: 0.8rem;
+    color: var(--text-light);
+    font-style: italic;
+  }
+
+  /* ===== PROGRESS SECTION ===== */
+  .progress-section { background: var(--green-mid); color: var(--white); }
+  .progress-section .section-title { color: var(--white); }
+  .progress-section .section-label { color: var(--green-glow); }
+  .progress-section .divider { background: var(--gold); }
+  .progress-numbers {
+    display: flex; gap: 30px; flex-wrap: wrap; margin-bottom: 30px;
+  }
+  .prog-num { }
+  .prog-num .val {
+    font-family: 'Bebas Neue', 'Arial Narrow', Arial, sans-serif;
+    font-size: 2.5rem;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .prog-num .lbl {
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.55);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .progress-bar-wrap {
+    background: rgba(0,0,0,0.25);
+    border-radius: 50px;
+    height: 22px;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 10px;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--green-light), var(--gold));
+    border-radius: 50px;
+    width: 0%;
+    transition: width 1.8s cubic-bezier(0.23, 1, 0.32, 1);
+    position: relative;
+  }
+  .progress-bar-fill::after {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.25) 50%, transparent 100%);
+    animation: shimmer 2s infinite;
+  }
+  .progress-pct {
+    font-family: 'Bebas Neue', 'Arial Narrow', Arial, sans-serif;
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.6);
+    text-align: right;
+    margin-top: 6px;
+  }
+  .progress-milestones {
+    display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px;
+  }
+  .milestone {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 8px;
+    padding: 10px 16px;
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.65);
+  }
+  .milestone.reached { border-color: var(--gold); color: var(--gold); }
+
+  /* ===== CONTRIBUTE SECTION ===== */
+  .contribute-section { background: var(--white); }
+  .tiers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+  .tier-card {
+    border: 2px solid var(--green-pale);
+    border-radius: var(--radius);
+    padding: 24px 18px;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .tier-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px var(--shadow); }
+  .tier-card.gold-tier { border-color: var(--gold); background: #fffbea; }
+  .tier-card.silver-tier { border-color: var(--silver); background: #f8f9fa; }
+  .tier-card.bronze-tier { border-color: var(--bronze); background: #fdf6f0; }
+  .tier-card.supporter-tier { border-color: var(--green-pale); }
+  .tier-icon { font-size: 2rem; margin-bottom: 10px; }
+  .tier-name {
+    font-family: 'Space Mono', 'Courier New', monospace;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 6px;
+    color: var(--text-light);
+  }
+  .tier-amount {
+    font-family: 'Bebas Neue', 'Arial Narrow', Arial, sans-serif;
+    font-size: 2rem;
+    color: var(--green-dark);
+    line-height: 1;
+  }
+  .tier-amount.gold-text { color: var(--gold-dark); }
+  .tier-amount.silver-text { color: #7a7e82; }
+  .tier-amount.bronze-text { color: var(--bronze); }
+  .tier-perk { font-size: 0.78rem; color: var(--text-mid); margin-top: 8px; }
+  .tier-badge {
+    position: absolute; top: 10px; right: 10px;
+    background: var(--gold);
+    color: var(--green-dark);
+    font-size: 0.6rem;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .payment-box {
+    background: var(--green-dark);
+    border-radius: var(--radius);
+    padding: 32px;
+    color: var(--white);
+  }
+  .payment-box h3 {
+    font-family: 'Bebas Neue', 'Arial Narrow', Arial, sans-serif;
+    font-size: 1.6rem;
+    color: var(--gold);
+    margin-bottom: 6px;
+    letter-spacing: 0.5px;
+  }
+  .payment-box p { font-size: 0.85rem; color: rgba(255,255,255,0.6); margin-bottom: 24px; }
+  .payment-methods {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+  }
+  .payment-method {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: var(--radius-sm);
+    padding: 20px;
+  }
+  .payment-method h4 {
+    font-family: 'Space Mono', 'Courier New', monospace;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--green-glow);
+    margin-bottom: 12px;
+  }
+  .payment-detail {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.8);
+    margin-bottom: 6px;
+    display: flex; align-items: flex-start; gap: 8px;
+  }
+  .payment-detail .key {
+    color: rgba(255,255,255,0.45);
+    min-width: 60px;
+    font-size: 0.78rem;
+  }
+  .qr-placeholder {
+    width: 110px; height: 110px;
+    background: var(--white);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 10px;
+    font-size: 0.7rem;
+    color: var(--text-light);
+    text-align: center;
+    padding: 10px;
+  }
+
+  /* ===== DONORS ===== */
+  .donors-section { background: var(--off-white); }
+  .donors-intro { font-size: 0.9rem; color: var(--text-mid); margin-bottom: 28px; max-width: 560px; }
+  .donors-wall {
+    display: flex; flex-wrap: wrap; gap: 10px;
+    margin-bottom: 24px;
+  }
+  .donor-chip {
+    background: var(--white);
+    border: 1px solid var(--green-pale);
+    border-radius: 50px;
+    padding: 8px 16px;
+    font-size: 0.85rem;
+    color: var(--text-dark);
+    display: flex; align-items: center; gap: 8px;
+    box-shadow: 0 2px 8px var(--shadow);
+  }
+  .donor-chip .tier-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .gold-dot { background: var(--gold); }
+  .silver-dot { background: var(--silver); }
+  .bronze-dot { background: var(--bronze); }
+  .green-dot { background: var(--green-glow); }
+  .donor-empty {
+    width: 100%;
+    background: var(--white);
+    border: 2px dashed var(--green-pale);
+    border-radius: var(--radius);
+    padding: 40px;
+    text-align: center;
+    color: var(--text-light);
+    font-size: 0.9rem;
+  }
+  .donor-empty .big { font-size: 2rem; margin-bottom: 10px; }
+  .thankyou-banner {
+    background: linear-gradient(135deg, var(--green-main), var(--green-dark));
+    border-radius: var(--radius);
+    padding: 28px 32px;
+    color: var(--white);
+    display: flex; align-items: center; gap: 20px;
+    flex-wrap: wrap;
+  }
+  .thankyou-banner .icon { font-size: 2.5rem; }
+  .thankyou-banner h3 {
+    font-family: 'Bebas Neue', 'Arial Narrow', Arial, sans-serif;
+    font-size: 1.5rem;
+    color: var(--gold);
+    margin-bottom: 4px;
+  }
+  .thankyou-banner p { font-size: 0.85rem; color: rgba(255,255,255,0.75); }
+
+  /* ===== UPDATES ===== */
+  .updates-section { background: var(--white); }
+  .updates-list { display: flex; flex-direction: column; gap: 0; margin-top: 10px; }
+  .update-item {
+    display: flex; gap: 20px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--green-pale);
+    position: relative;
+  }
+  .update-item:last-child { border-bottom: none; }
+  .update-date-col { display: flex; flex-direction: column; align-items: center; gap: 6px; min-width: 50px; }
+  .update-dot {
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: var(--green-light);
+    border: 3px solid var(--white);
+    box-shadow: 0 0 0 2px var(--green-light);
+    flex-shrink: 0;
+  }
+  .update-dot.pending { background: var(--silver); box-shadow: 0 0 0 2px var(--silver); }
+  .update-line {
+    width: 2px; flex: 1;
+    background: var(--green-pale);
+    margin-top: 2px;
+  }
+  .update-date {
+    font-family: 'Space Mono', 'Courier New', monospace;
+    font-size: 0.62rem;
+    color: var(--text-light);
+    text-align: center;
+    line-height: 1.3;
+    margin-top: 4px;
+  }
+  .update-content { padding-top: 0; }
+  .update-tag {
+    display: inline-block;
+    font-family: 'Space Mono', 'Courier New', monospace;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-bottom: 6px;
+    background: var(--green-pale);
+    color: var(--green-mid);
+  }
+  .update-tag.upcoming { background: #fff3cc; color: #7d5a00; }
+  .update-content h4 { font-size: 0.95rem; font-weight: 600; color: var(--text-dark); margin-bottom: 4px; }
+  .update-content p { font-size: 0.83rem; color: var(--text-mid); }
+
+  /* ===== CONTACT ===== */
+  .contact-section { background: var(--green-dark); color: var(--white); }
+  .contact-section .section-title { color: var(--white); }
+  .contact-section .section-label { color: var(--green-glow); }
+  .contact-section .divider { background: var(--gold); }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin-top: 10px;
+  }
+  .contact-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: var(--radius);
+    padding: 22px;
+    transition: background 0.2s;
+  }
+  .contact-card:hover { background: rgba(255,255,255,0.1); }
+  .contact-card .c-icon { font-size: 1.6rem; margin-bottom: 10px; }
+  .contact-card h4 {
+    font-family: 'Space Mono', 'Courier New', monospace;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--green-glow);
+    margin-bottom: 6px;
+  }
+  .contact-card p { font-size: 0.88rem; color: rgba(255,255,255,0.8); }
+  .contact-card a { color: var(--gold); }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: var(--green-dark);
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding: 28px 20px;
+    text-align: center;
+  }
+  footer p { font-size: 0.78rem; color: rgba(255,255,255,0.35); }
+  footer strong { color: rgba(255,255,255,0.6); }
+
+  /* ===== SHIMMER for progress bar ===== */
+  @keyframes shimmer {
+    0%   { transform: translateX(-100%); }
+    100% { transform: translateX(200%); }
+  }
+  /* fade-in — always visible, no JS dependency */
+  .fade-in {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* ===== RESPONSIVE ===== */
+  /* ===== TABLET (max 768px) ===== */
+  @media (max-width: 768px) {
+    .section { padding: 50px 0; }
+    .scope-grid { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr 1fr; }
+    .tiers-grid { grid-template-columns: 1fr 1fr !important; }
+    .why-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  /* ===== MOBILE (max 600px) ===== */
+  @media (max-width: 600px) {
+    /* Hero */
+    .hero { padding: 90px 16px 50px; }
+    .hero-stats { gap: 10px; }
+    .hero-stat { padding: 10px 14px; }
+    .hero-stat .val { font-size: 1.3rem; }
+    .hero-badge { font-size: 0.6rem; padding: 6px 12px; }
+
+    /* Navbar */
+    .navbar { padding: 12px 16px; }
+    .nav-brand { font-size: 1.1rem; }
+    .nav-cta { padding: 7px 14px; font-size: 0.75rem; }
+
+    /* Sections */
+    .section { padding: 44px 0; }
+    .container { padding: 0 16px; }
+    .section-title { font-size: 1.8rem !important; }
+
+    /* Why grid — 1 col on small phones */
+    .why-grid { grid-template-columns: 1fr; }
+    .why-card { padding: 20px 18px; }
+
+    /* Scope grid */
+    .scope-grid { grid-template-columns: 1fr; }
+
+    /* Budget table — make it scroll horizontally */
+    .budget-table { font-size: 0.78rem; min-width: 480px; }
+    .budget-table th, .budget-table td { padding: 10px 12px; }
+
+    /* Progress */
+    .progress-numbers { gap: 18px; }
+    .prog-num .val { font-size: 1.8rem; }
+    .progress-milestones { gap: 8px; }
+    .milestone { font-size: 0.72rem; padding: 8px 12px; }
+
+    /* Tiers — 1 col on smallest phones */
+    .tiers-grid { grid-template-columns: 1fr 1fr !important; }
+    .tier-card { padding: 18px 12px; }
+    .tier-amount { font-size: 1.5rem; }
+    .tier-icon { font-size: 1.6rem; }
+
+    /* Payment box */
+    .payment-box { padding: 20px 16px; }
+    .payment-box h3 { font-size: 1.3rem; }
+
+    /* Payment methods — stack vertically on mobile */
+    .payment-box > div[style*="grid"] {
+      grid-template-columns: 1fr !important;
+    }
+
+    /* Donors */
+    .thankyou-banner { padding: 20px 16px; flex-direction: column; gap: 12px; }
+    .thankyou-banner .icon { font-size: 2rem; }
+
+    /* Updates timeline */
+    .update-item { gap: 12px; }
+    .update-date-col { min-width: 40px; }
+    .update-date { font-size: 0.58rem; }
+    .update-content h4 { font-size: 0.88rem; }
+    .update-content p { font-size: 0.78rem; }
+
+    /* Contact grid — 1 col */
+    .contact-grid { grid-template-columns: 1fr; }
+    .contact-card { padding: 16px; }
+
+    /* Footer */
+    footer { padding: 22px 16px; }
+  }
+
+  /* ===== VERY SMALL PHONES (max 380px) ===== */
+  @media (max-width: 380px) {
+    .hero h1 { font-size: 2.2rem; }
+    .hero-stats { flex-direction: column; align-items: center; }
+    .hero-stat { width: 100%; max-width: 220px; }
+    .tiers-grid { grid-template-columns: 1fr !important; }
+    .nav-brand { font-size: 1rem; }
+    .nav-cta { padding: 6px 10px; font-size: 0.7rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="nav-brand">
+    <span class="ball">⚽</span>
+    SGN Play Ground
+  </div>
+  <a href="javascript:void(0)" onclick="sgnGoTo('contribute')" class="nav-cta">Contribute Now</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">📢 SGN Community Initiative · Open for Contributions</div>
+  <h1>Build Our <span>Football</span><br>Ground</h1>
+  <p class="hero-sub">A community-funded 5-a-side / 6-a-side football ground for the youth of Sanjay Gandhi Nagar</p>
+  <p class="hero-location">Sanjay Gandhi Nagar (SGN), Bengaluru</p>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="val">75×75</div>
+      <div class="lbl">Feet Ground</div>
+    </div>
+    <div class="hero-stat">
+      <div class="val">INR 7,20,000</div>
+      <div class="lbl">Fundraising Goal</div>
+    </div>
+    <div class="hero-stat">
+      <div class="val">15ft</div>
+      <div class="lbl">Perimeter Fence</div>
+    </div>
+  </div>
+  <a href="javascript:void(0)" onclick="sgnGoTo('contribute')" class="btn-primary">⚽ Contribute Now</a>
+  <div class="hero-scroll">Scroll to explore</div>
+</section>
+
+<!-- PITCH ILLUSTRATION -->
+<section class="pitch-section" style="background: linear-gradient(180deg, #0a3d1f 0%, #0d5c2b 50%, #0a3d1f 100%); padding: 60px 20px; overflow:hidden; position:relative;">
+
+  <!-- Background glow orbs -->
+  <div style="position:absolute;top:10%;left:10%;width:300px;height:300px;background:radial-gradient(circle,rgba(39,174,96,0.15) 0%,transparent 70%);pointer-events:none;"></div>
+  <div style="position:absolute;bottom:10%;right:10%;width:300px;height:300px;background:radial-gradient(circle,rgba(241,196,15,0.1) 0%,transparent 70%);pointer-events:none;"></div>
+
+  <div style="max-width:900px;margin:0 auto;">
+
+    <!-- Section heading -->
+    <div style="text-align:center;margin-bottom:40px;">
+      <p style="font-family:'Space Mono',monospace;font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;color:#52be80;margin-bottom:10px;">⚽ Proposed Ground Layout</p>
+      <h2 style="font-family:'Bebas Neue',cursive;font-size:clamp(2rem,6vw,3rem);color:#ffffff;letter-spacing:2px;line-height:1;">SGN <span style="color:#f1c40f;">Play Ground</span></h2>
+      <p style="color:rgba(255,255,255,0.5);font-size:0.82rem;margin-top:8px;font-family:'Space Mono',monospace;letter-spacing:0.1em;">75 FT × 75 FT · 5-A-SIDE / 6-A-SIDE · SANJAY GANDHI NAGAR</p>
+    </div>
+
+    <!-- Main pitch + players layout -->
+    <div style="display:flex;align-items:center;gap:0;justify-content:center;flex-wrap:wrap;row-gap:16px;">
+
+      <!-- Player 1 — Left (Striker silhouette: shooting pose) -->
+      <div style="flex:0 0 auto;width:clamp(100px,16vw,160px);display:flex;flex-direction:column;align-items:center;gap:12px;z-index:2;">
+        <svg viewBox="0 0 120 220" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <!-- Gold glow behind player -->
+          <ellipse cx="60" cy="200" rx="40" ry="8" fill="rgba(241,196,15,0.3)"/>
+          <!-- Jersey number badge -->
+          <circle cx="92" cy="20" r="16" fill="#f1c40f"/>
+          <text x="92" y="26" text-anchor="middle" font-family="'Bebas Neue',cursive" font-size="16" fill="#0a3d1f" font-weight="bold">10</text>
+          <!-- Head -->
+          <circle cx="55" cy="28" r="16" fill="#f4c28a"/>
+          <!-- Hair -->
+          <ellipse cx="55" cy="16" rx="16" ry="8" fill="#2c1810"/>
+          <!-- Body / Jersey (green) -->
+          <path d="M30 52 Q28 48 35 44 L45 42 L55 44 L65 42 L75 44 Q82 48 80 52 L78 90 Q68 95 55 95 Q42 95 32 90 Z" fill="#1e8449"/>
+          <!-- Jersey stripe -->
+          <path d="M45 42 L55 44 L55 95 Q48 95 42 93 L40 52 Z" fill="#27ae60"/>
+          <!-- Arms -->
+          <!-- Left arm reaching forward/up (shooting) -->
+          <path d="M30 55 Q10 50 5 38 Q8 34 12 36 Q18 46 32 52 Z" fill="#f4c28a"/>
+          <!-- Right arm back -->
+          <path d="M80 55 Q96 65 100 58 Q102 54 99 52 Q92 56 78 52 Z" fill="#f4c28a"/>
+          <!-- Shorts -->
+          <rect x="38" y="94" width="34" height="28" rx="4" fill="#0a3d1f"/>
+          <!-- Left leg — kicking forward -->
+          <path d="M38 122 Q32 140 22 158 Q18 162 22 165 Q26 168 30 164 Q38 148 46 126 Z" fill="#f4c28a"/>
+          <!-- Left shin guard + sock -->
+          <path d="M22 158 Q18 168 20 175 Q28 178 32 172 Q30 165 22 165 Z" fill="#27ae60"/>
+          <ellipse cx="26" cy="178" rx="8" ry="5" fill="#1a1a1a"/>
+          <!-- Right leg — planted -->
+          <path d="M52 122 Q54 145 56 165 Q52 172 58 175 Q64 175 64 168 Q62 145 58 122 Z" fill="#f4c28a"/>
+          <ellipse cx="60" cy="178" rx="9" ry="5" fill="#1a1a1a"/>
+          <!-- Ball at foot -->
+          <circle cx="16" cy="188" r="14" fill="white" stroke="#ccc" stroke-width="1"/>
+          <path d="M10 180 L16 174 L22 180 L20 188 L12 188 Z" fill="#222" opacity="0.15"/>
+          <path d="M16 202 L22 196 L26 202" fill="none" stroke="#222" stroke-width="1" opacity="0.2"/>
+          <!-- Name label -->
+          <rect x="20" y="205" width="70" height="16" rx="8" fill="rgba(241,196,15,0.2)" stroke="rgba(241,196,15,0.5)" stroke-width="0.5"/>
+          <text x="55" y="217" text-anchor="middle" font-family="'Space Mono',monospace" font-size="8" fill="#f1c40f" letter-spacing="1">STRIKER</text>
+        </svg>
+      </div>
+
+      <!-- Pitch SVG -->
+      <div style="flex:1;min-width:min(280px,90vw);max-width:560px;border-radius:16px;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,0.6),0 0 0 3px rgba(82,190,128,0.35);position:relative;z-index:1;">
+        <svg viewBox="0 0 560 380" xmlns="http://www.w3.org/2000/svg" width="100%">
+          <defs>
+            <linearGradient id="pitchGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#1a7a3c"/>
+              <stop offset="50%" style="stop-color:#1e8449"/>
+              <stop offset="100%" style="stop-color:#1a7a3c"/>
+            </linearGradient>
+            <linearGradient id="stripeGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" style="stop-color:rgba(0,0,0,0.06)"/>
+              <stop offset="100%" style="stop-color:rgba(0,0,0,0.00)"/>
+            </linearGradient>
+          </defs>
+          <!-- Pitch base -->
+          <rect fill="url(#pitchGrad)" width="560" height="380"/>
+          <!-- Alternating dark stripes -->
+          <rect fill="rgba(0,0,0,0.07)" x="0" y="0" width="80" height="380"/>
+          <rect fill="rgba(0,0,0,0.07)" x="160" y="0" width="80" height="380"/>
+          <rect fill="rgba(0,0,0,0.07)" x="320" y="0" width="80" height="380"/>
+          <rect fill="rgba(0,0,0,0.07)" x="480" y="0" width="80" height="380"/>
+          <!-- Outer boundary -->
+          <rect fill="none" stroke="white" stroke-width="2.5" x="24" y="24" width="512" height="332" rx="3"/>
+          <!-- Halfway line -->
+          <line stroke="white" stroke-width="1.5" x1="280" y1="24" x2="280" y2="356"/>
+          <!-- Centre circle -->
+          <circle fill="none" stroke="white" stroke-width="1.5" cx="280" cy="190" r="52"/>
+          <circle fill="white" cx="280" cy="190" r="3.5"/>
+          <!-- Left penalty box -->
+          <rect fill="none" stroke="white" stroke-width="1.5" x="24" y="108" width="88" height="164"/>
+          <!-- Left 6-yard box -->
+          <rect fill="none" stroke="white" stroke-width="1.5" x="24" y="148" width="44" height="84"/>
+          <!-- Left penalty spot -->
+          <circle fill="white" cx="80" cy="190" r="2.5"/>
+          <!-- Left goal -->
+          <rect fill="rgba(255,255,255,0.08)" stroke="white" stroke-width="2" x="4" y="154" width="22" height="72" rx="2"/>
+          <!-- Right penalty box -->
+          <rect fill="none" stroke="white" stroke-width="1.5" x="448" y="108" width="88" height="164"/>
+          <!-- Right 6-yard box -->
+          <rect fill="none" stroke="white" stroke-width="1.5" x="492" y="148" width="44" height="84"/>
+          <!-- Right penalty spot -->
+          <circle fill="white" cx="480" cy="190" r="2.5"/>
+          <!-- Right goal -->
+          <rect fill="rgba(255,255,255,0.08)" stroke="white" stroke-width="2" x="534" y="154" width="22" height="72" rx="2"/>
+          <!-- Corner arcs -->
+          <path fill="none" stroke="white" stroke-width="1.5" d="M24,34 Q34,24 44,24"/>
+          <path fill="none" stroke="white" stroke-width="1.5" d="M536,24 Q546,24 536,34"/>
+          <path fill="none" stroke="white" stroke-width="1.5" d="M24,346 Q24,356 34,356"/>
+          <path fill="none" stroke="white" stroke-width="1.5" d="M536,346 Q536,356 526,356"/>
+          <!-- Fencing side poles -->
+          <rect fill="#aaa" x="0" y="0" width="5" height="380"/>
+          <rect fill="#aaa" x="555" y="0" width="5" height="380"/>
+          <!-- Top/bottom net lines -->
+          <line stroke="#aaa" stroke-width="1" stroke-dasharray="5,5" x1="5" y1="0" x2="555" y2="0"/>
+          <line stroke="#aaa" stroke-width="1" stroke-dasharray="5,5" x1="5" y1="380" x2="555" y2="380"/>
+          <!-- SGN label watermark -->
+          <text x="280" y="198" text-anchor="middle" font-family="'Bebas Neue',cursive" font-size="28" fill="rgba(255,255,255,0.06)" letter-spacing="4">SGN</text>
+          <!-- Ball -->
+          <circle fill="white" cx="280" cy="190" r="10"/>
+          <path d="M274 184 L280 179 L286 184 L284 192 L276 192 Z" fill="#222" opacity="0.18"/>
+          <!-- Dimension labels -->
+          <text fill="rgba(255,255,255,0.45)" font-family="monospace" font-size="11" x="280" y="373" text-anchor="middle">75 ft</text>
+          <text fill="rgba(255,255,255,0.45)" font-family="monospace" font-size="11" x="12" y="194" text-anchor="middle" transform="rotate(-90,12,194)">75 ft</text>
+        </svg>
+      </div>
+
+      <!-- Player 2 — Right (Goalkeeper dive / defender silhouette) -->
+      <div style="flex:0 0 auto;width:clamp(100px,16vw,160px);display:flex;flex-direction:column;align-items:center;gap:12px;z-index:2;">
+        <svg viewBox="0 0 120 220" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <!-- Green glow behind player -->
+          <ellipse cx="60" cy="200" rx="40" ry="8" fill="rgba(39,174,96,0.3)"/>
+          <!-- Jersey number badge -->
+          <circle cx="28" cy="20" r="16" fill="#27ae60"/>
+          <text x="28" y="26" text-anchor="middle" font-family="'Bebas Neue',cursive" font-size="16" fill="white" font-weight="bold">9</text>
+          <!-- Head -->
+          <circle cx="65" cy="28" r="16" fill="#c8956a"/>
+          <!-- Hair -->
+          <ellipse cx="65" cy="16" rx="14" ry="7" fill="#1a1a1a"/>
+          <!-- Body / Jersey (gold/yellow) -->
+          <path d="M38 52 Q36 48 43 44 L53 42 L65 44 L77 42 L87 44 Q90 48 88 52 L86 90 Q75 95 65 95 Q52 95 40 90 Z" fill="#f1c40f"/>
+          <!-- Jersey collar -->
+          <path d="M55 42 L65 44 L75 42 Q72 38 65 37 Q58 38 55 42 Z" fill="#e0b800"/>
+          <!-- Arms — outstretched in celebration pose -->
+          <!-- Right arm up -->
+          <path d="M88 52 Q104 38 110 28 Q113 24 110 22 Q107 20 104 24 Q96 34 86 50 Z" fill="#c8956a"/>
+          <!-- Left arm down/out -->
+          <path d="M38 56 Q18 70 12 78 Q10 82 14 84 Q18 86 20 82 Q28 74 40 60 Z" fill="#c8956a"/>
+          <!-- Shorts -->
+          <rect x="42" y="94" width="36" height="28" rx="4" fill="#1a1a1a"/>
+          <!-- Right leg — forward running -->
+          <path d="M62 122 Q58 142 50 160 Q46 164 50 168 Q54 170 58 166 Q66 148 68 124 Z" fill="#c8956a"/>
+          <ellipse cx="54" cy="172" rx="8" ry="5" fill="#333"/>
+          <!-- Left leg — back -->
+          <path d="M74 122 Q80 142 84 160 Q88 165 84 168 Q80 171 76 167 Q72 150 68 122 Z" fill="#c8956a"/>
+          <ellipse cx="80" cy="172" rx="8" ry="5" fill="#333"/>
+          <!-- Name label -->
+          <rect x="20" y="205" width="80" height="16" rx="8" fill="rgba(39,174,96,0.2)" stroke="rgba(39,174,96,0.5)" stroke-width="0.5"/>
+          <text x="60" y="217" text-anchor="middle" font-family="'Space Mono',monospace" font-size="8" fill="#52be80" letter-spacing="1">FORWARD</text>
+        </svg>
+      </div>
+
+    </div>
+
+    <!-- Stats bar below pitch -->
+    <div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:32px;">
+      <div style="background:rgba(255,255,255,0.07);border:1px solid rgba(82,190,128,0.25);border-radius:12px;padding:14px 22px;text-align:center;min-width:110px;">
+        <div style="font-family:'Bebas Neue',cursive;font-size:1.5rem;color:#f1c40f;line-height:1;">15 FT</div>
+        <div style="font-size:0.68rem;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:0.1em;margin-top:3px;">Perimeter Fence</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.07);border:1px solid rgba(82,190,128,0.25);border-radius:12px;padding:14px 22px;text-align:center;min-width:110px;">
+        <div style="font-family:'Bebas Neue',cursive;font-size:1.5rem;color:#f1c40f;line-height:1;">75×75</div>
+        <div style="font-size:0.68rem;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:0.1em;margin-top:3px;">Feet · Full Size</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.07);border:1px solid rgba(82,190,128,0.25);border-radius:12px;padding:14px 22px;text-align:center;min-width:110px;">
+        <div style="font-family:'Bebas Neue',cursive;font-size:1.5rem;color:#f1c40f;line-height:1;">2</div>
+        <div style="font-size:0.68rem;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:0.1em;margin-top:3px;">Goal Posts</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.07);border:1px solid rgba(82,190,128,0.25);border-radius:12px;padding:14px 22px;text-align:center;min-width:110px;">
+        <div style="font-family:'Bebas Neue',cursive;font-size:1.5rem;color:#f1c40f;line-height:1;">6v6</div>
+        <div style="font-size:0.68rem;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:0.1em;margin-top:3px;">Max Players</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- WHY SECTION -->
+<section class="why-section section">
+  <div class="container">
+    <div class="fade-in">
+      <p class="section-label">Why It Matters</p>
+      <h2 class="section-title">More Than Just <span>A Ground</span></h2>
+      <div class="divider"></div>
+    </div>
+    <div class="why-grid">
+      <div class="why-card fade-in">
+        <div class="why-icon">🧒</div>
+        <h3>Youth Development</h3>
+        <p>A dedicated space gives young people a safe place to play, build discipline, and develop sporting talent right in their own neighbourhood.</p>
+      </div>
+      <div class="why-card fade-in">
+        <div class="why-icon">🏃</div>
+        <h3>Health & Fitness</h3>
+        <p>Regular physical activity reduces stress, builds stamina, and promotes long-term health for children and adults alike.</p>
+      </div>
+      <div class="why-card fade-in">
+        <div class="why-icon">🤝</div>
+        <h3>Community Bonding</h3>
+        <p>Shared spaces create shared memories. A local ground becomes a hub where families and neighbours come together.</p>
+      </div>
+      <div class="why-card fade-in">
+        <div class="why-icon">🌙</div>
+        <h3>Night Play Option</h3>
+        <p>With optional floodlights, working adults and students can enjoy sport in the evenings after their day responsibilities.</p>
+      </div>
+      <div class="why-card fade-in">
+        <div class="why-icon">🏆</div>
+        <h3>Talent & Tournaments</h3>
+        <p>A proper ground enables local tournaments, inter-colony matches, and opportunities to spot and nurture local talent.</p>
+      </div>
+      <div class="why-card fade-in">
+        <div class="why-icon">🔒</div>
+        <h3>Safe Environment</h3>
+        <p>A fenced, dedicated space keeps children away from traffic and provides parents peace of mind during playtime.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECT OVERVIEW (Scope) -->
+<section class="overview-section section">
+  <div class="container">
+    <div class="fade-in">
+      <p class="section-label">Project Scope</p>
+      <h2 class="section-title">What Will Be <span>Built</span></h2>
+      <div class="divider"></div>
+      <p style="color:rgba(255,255,255,0.65); font-size:0.9rem; margin-bottom:28px; max-width:600px;">
+        Every rupee contributed goes towards a clearly defined scope of construction. Here's exactly what we're building:
+      </p>
+    </div>
+    <div class="scope-grid fade-in">
+      <div class="scope-item">
+        <div class="scope-icon">🔗</div>
+        <div>
+          <h4>GI Chain Link Fencing</h4>
+          <p>8 gauge, 2-inch mesh · 12 ft height chain link + 3 ft safety net on top</p>
+        </div>
+      </div>
+      <div class="scope-item">
+        <div class="scope-icon">🏗️</div>
+        <div>
+          <h4>MS Poles & Foundation</h4>
+          <p>Mild steel poles with concrete foundation for structural stability</p>
+        </div>
+      </div>
+      <div class="scope-item">
+        <div class="scope-icon">⚽</div>
+        <div>
+          <h4>Goal Post Installation</h4>
+          <p>Standard 5-a-side goal posts, properly anchored and positioned</p>
+        </div>
+      </div>
+      <div class="scope-item">
+        <div class="scope-icon">📐</div>
+        <div>
+          <h4>Ground Leveling & Marking</h4>
+          <p>Surface preparation and pitch line marking for a playable surface</p>
+        </div>
+      </div>
+      <div class="scope-item">
+        <div class="scope-icon">💡</div>
+        <div>
+          <h4>Lighting (Optional)</h4>
+          <p>Floodlights for evening and night play — if funding permits</p>
+        </div>
+      </div>
+      <div class="scope-item">
+        <div class="scope-icon">📏</div>
+        <div>
+          <h4>Ground Dimensions</h4>
+          <p>75 ft × 75 ft · 5-a-side / 6-a-side format · Full perimeter fencing</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BUDGET BREAKDOWN -->
+<section class="budget-section section">
+  <div class="container">
+    <div class="fade-in">
+      <p class="section-label">Transparent Finances</p>
+      <h2 class="section-title">Budget <span>Breakdown</span></h2>
+      <div class="divider"></div>
+    </div>
+    <div class="fade-in" style="overflow-x:auto;">
+      <table class="budget-table">
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Estimated Cost</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              🔗 Perimeter Fencing
+              <br><small style="color:#6a9a7a">12ft chain link + 3ft safety net + MS poles + concrete</small>
+            </td>
+            <td><strong>INR 5,40,000 – INR 6,60,000</strong></td>
+            <td><span class="budget-badge">Major</span></td>
+          </tr>
+          <tr>
+            <td>⚽ Goal Post Installation</td>
+            <td><strong>INR 24,000</strong></td>
+            <td><span class="budget-badge">Fixed</span></td>
+          </tr>
+          <tr>
+            <td>📐 Ground Preparation & Marking</td>
+            <td><strong>INR 36,000</strong></td>
+            <td><span class="budget-badge">Fixed</span></td>
+          </tr>
+          <tr>
+            <td>💡 Floodlighting</td>
+            <td><strong>INR 48,000</strong></td>
+            <td><span class="budget-badge" style="background:#fff3cd;color:#7d5a00">Optional</span></td>          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td>🎯 Total Estimated Cost</td>
+            <td>INR 6,00,000 – INR 7,20,000</td>
+            <td>Fundraising target: <strong>INR 7,20,000</strong></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+    <p class="budget-note">* All expenses will be managed transparently. Receipts and progress updates will be shared with contributors regularly.</p>
+  </div>
+</section>
+
+<!-- PROGRESS TRACKER -->
+<section class="progress-section section" id="progress">
+  <div class="container">
+    <div class="fade-in">
+      <p class="section-label">Fundraising Progress</p>
+      <h2 class="section-title">Funds <span>Collected</span></h2>
+      <div class="divider"></div>
+    </div>
+    <div class="fade-in">
+      <div class="progress-numbers">
+        <div class="prog-num">
+          <!-- ✏️ UPDATE THIS AMOUNT AS FUNDS COME IN -->
+          <div class="val" id="collected-amt">INR 0</div>
+          <div class="lbl">Collected</div>
+        </div>
+        <div class="prog-num">
+          <div class="val">INR 7,20,000</div>
+          <div class="lbl">Goal</div>
+        </div>
+        <div class="prog-num">
+          <div class="val" id="donor-count">0</div>
+          <div class="lbl">Contributors</div>
+        </div>
+      </div>
+      <div class="progress-bar-wrap">
+        <!-- ✏️ UPDATE data-pct to reflect actual % e.g. data-pct="35" for 35% -->
+        <div class="progress-bar-fill" id="prog-bar" data-pct="0"></div>
+      </div>
+      <p class="progress-pct" id="prog-label">0% of goal reached</p>
+      <div class="progress-milestones">
+        <div class="milestone" id="m25">🎯 25% — INR 1,80,000</div>
+        <div class="milestone" id="m50">🏗️ 50% — INR 3,60,000 · Construction begins</div>
+        <div class="milestone" id="m75">⚽ 75% — INR 5,40,000 · Fencing starts</div>
+        <div class="milestone" id="m100">🏆 100% — INR 7,20,000 · Ground complete!</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTRIBUTE -->
+<section class="contribute-section section" id="contribute">
+  <div class="container">
+    <div class="fade-in">
+      <p class="section-label">Be Part of This</p>
+      <h2 class="section-title">Choose Your <span>Contribution</span></h2>
+      <div class="divider"></div>
+      <p style="color:var(--text-mid); font-size:0.9rem; margin-bottom:28px;">Every contribution, big or small, brings us one step closer to the ground. Your name will be recognised on the donors wall.</p>
+    </div>
+    <div class="tiers-grid fade-in" style="grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));">
+      <div class="tier-card bronze-tier">
+        <div class="tier-icon">🥉</div>
+        <div class="tier-name">Bronze</div>
+        <div class="tier-amount bronze-text">INR 1,000</div>
+        <p class="tier-perk">Donor wall + special mention at inauguration</p>
+      </div>
+      <div class="tier-card silver-tier">
+        <div class="tier-icon">🥈</div>
+        <div class="tier-name">Silver</div>
+        <div class="tier-amount silver-text">INR 5,000</div>
+        <p class="tier-perk">Prominent name display + recognition certificate</p>
+      </div>
+      <div class="tier-card gold-tier">
+        <div class="tier-icon">🥇</div>
+        <div class="tier-name">Gold</div>
+        <div class="tier-amount gold-text">INR 10,000</div>
+        <p class="tier-perk">Sponsor board on ground + VIP inauguration invite</p>
+      </div>
+      <div class="tier-card" style="border-color:#a78bfa; background:#f5f3ff;">
+        <div class="tier-icon">🌟</div>
+        <div class="tier-name" style="color:#7c3aed;">Platinum</div>
+        <div class="tier-amount" style="color:#6d28d9;">INR 20,000</div>
+        <p class="tier-perk">Name on permanent sponsor board + front-row inauguration seat</p>
+      </div>
+      <div class="tier-card" style="border-color:#f97316; background:#fff7ed;">
+        <div class="tier-icon">🔥</div>
+        <div class="tier-name" style="color:#c2410c;">Champion</div>
+        <div class="tier-amount" style="color:#ea580c;">INR 30,000</div>
+        <p class="tier-perk">Dedicated ground plaque + featured in all inauguration materials</p>
+      </div>
+      <div class="tier-card" style="border-color:#e11d48; background:#fff1f2;">
+        <div class="tier-badge" style="background:#e11d48; color:white;">🏅 Elite</div>
+        <div class="tier-icon">👑</div>
+        <div class="tier-name" style="color:#be123c;">Founding Patron</div>
+        <div class="tier-amount" style="color:#e11d48;">INR 50,000+</div>
+        <p class="tier-perk">Named zone on the ground + lifetime recognition as founding patron</p>
+      </div>
+    </div>
+
+    <!-- Payment Box -->
+    <div class="payment-box fade-in">
+      <h3>Payment Details</h3>
+      <p>Use any of the options below to send your contribution. Please share your name after payment so we can add you to the donor wall.</p>
+      <!-- UPI ONLY PAYMENT LAYOUT -->
+      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(min(240px,100%), 1fr)); gap:16px;">
+
+        <!-- UPI Details Card -->
+        <div class="payment-method" style="grid-column: span 1;">
+          <h4>📱 Pay via UPI</h4>
+          <div class="payment-detail">
+            <span class="key">UPI ID</span>
+            <span><!-- ✏️ Replace with your UPI ID -->
+              <span style="color:var(--gold); font-family:'Space Mono',monospace; font-size:0.9rem;">your-upi-id@bank</span>
+            </span>
+          </div>
+          <div class="payment-detail">
+            <span class="key">Name</span>
+            <span><!-- ✏️ Replace with account holder name --><em style="color:rgba(255,255,255,0.4)">Account Holder Name</em></span>
+          </div>
+          <div style="margin-top:16px; padding:12px; background:rgba(82,190,128,0.12); border:1px solid rgba(82,190,128,0.2); border-radius:8px;">
+            <p style="font-size:0.75rem; color:rgba(255,255,255,0.6); margin:0 0 6px;">Works with all UPI apps:</p>
+            <div style="display:flex; flex-wrap:wrap; gap:8px;">
+              <span style="background:rgba(255,255,255,0.08); padding:4px 10px; border-radius:20px; font-size:0.72rem; color:rgba(255,255,255,0.7);">📲 PhonePe</span>
+              <span style="background:rgba(255,255,255,0.08); padding:4px 10px; border-radius:20px; font-size:0.72rem; color:rgba(255,255,255,0.7);">📲 GPay</span>
+              <span style="background:rgba(255,255,255,0.08); padding:4px 10px; border-radius:20px; font-size:0.72rem; color:rgba(255,255,255,0.7);">📲 Paytm</span>
+              <span style="background:rgba(255,255,255,0.08); padding:4px 10px; border-radius:20px; font-size:0.72rem; color:rgba(255,255,255,0.7);">📲 BHIM</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- QR Code Card -->
+        <div class="payment-method" style="text-align:center; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+          <h4>📷 Scan & Pay — UPI QR</h4>
+          <!-- ✏️ REPLACE the div below with: <img src="your-qr.png" alt="UPI QR Code" style="width:140px;height:140px;border-radius:10px;margin:0 auto 10px;display:block;"> -->
+          <div style="width:140px; height:140px; background:white; border-radius:12px; display:flex; flex-direction:column; align-items:center; justify-content:center; margin:0 auto 12px; padding:10px;">
+            <div style="font-size:2.8rem;">📱</div>
+            <div style="font-size:0.6rem; color:#888; margin-top:6px; text-align:center; line-height:1.4;">Replace with<br>your UPI QR image</div>
+          </div>
+          <p style="font-size:0.75rem; color:rgba(255,255,255,0.45); margin:0;">Open any UPI app → Scan → Pay</p>
+          <p style="font-size:0.72rem; color:rgba(255,255,255,0.3); margin-top:4px;">GPay · PhonePe · Paytm · BHIM</p>
+        </div>
+
+      </div>
+      <div style="margin-top:20px; padding:14px 18px; background:rgba(241,196,15,0.1); border:1px solid rgba(241,196,15,0.25); border-radius:8px; font-size:0.82rem; color:rgba(255,255,255,0.65);">
+        💬 After contributing, please WhatsApp/call the coordinator with your name, amount, and transaction ID so we can update the donor wall.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DONORS WALL -->
+<section class="donors-section section">
+  <div class="container">
+    <div class="fade-in">
+      <p class="section-label">Our Supporters</p>
+      <h2 class="section-title">Donor <span>Recognition</span></h2>
+      <div class="divider"></div>
+      <p class="donors-intro">Every contributor is a cornerstone of this project. Your name will appear here (only if you consent to be recognised publicly).</p>
+    </div>
+
+    <!-- ✏️ Once contributions come in, add donor chips here. Remove the "empty" block. -->
+    <div class="donors-wall fade-in">
+      <div class="donor-empty">
+        <div class="big">🌱</div>
+        <strong>Be the first to contribute!</strong><br>
+        Your name will be proudly displayed here as we build our community ground.
+      </div>
+
+      <!-- EXAMPLE chips (uncomment and edit when real donors arrive):
+      <div class="donor-chip"><span class="tier-dot gold-dot"></span> Ramesh Kumar · INR 10,000</div>
+      <div class="donor-chip"><span class="tier-dot silver-dot"></span> Priya Sharma · INR 5,000</div>
+      <div class="donor-chip"><span class="tier-dot bronze-dot"></span> Arun Nair · INR 1,000</div>
+      <div class="donor-chip"><span class="tier-dot green-dot"></span> Anonymous · INR 500</div>
+      -->
+    </div>
+
+    <!-- Thank You Banner -->
+    <div class="thankyou-banner fade-in">
+      <div class="icon">🙏</div>
+      <div>
+        <h3>Thank You, Community!</h3>
+        <p>Your generosity is building more than a football ground — you're building a legacy for every child in this neighbourhood. We are grateful for every single rupee contributed.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONSTRUCTION UPDATES -->
+<section class="updates-section section">
+  <div class="container">
+    <div class="fade-in">
+      <p class="section-label">Progress Log</p>
+      <h2 class="section-title">Construction <span>Updates</span></h2>
+      <div class="divider"></div>
+    </div>
+    <div class="updates-list fade-in">
+      <div class="update-item">
+        <div class="update-date-col">
+          <div class="update-dot"></div>
+          <div class="update-line"></div>
+          <div class="update-date">Mar<br>2026</div>
+        </div>
+        <div class="update-content">
+          <span class="update-tag">✅ Launched</span>
+          <h4>Project Announced & Fundraising Begins</h4>
+          <p>The community initiative has been formally launched. Fundraising page is live and the first round of awareness is underway through WhatsApp groups and local networks.</p>
+        </div>
+      </div>
+      <div class="update-item">
+        <div class="update-date-col">
+          <div class="update-dot pending"></div>
+          <div class="update-line"></div>
+          <div class="update-date">TBD</div>
+        </div>
+        <div class="update-content">
+          <span class="update-tag upcoming">🔜 Upcoming</span>
+          <h4>Vendor Quotes Finalized & Permissions Obtained</h4>
+          <p>Final quotes from contractors will be compared and the best value option will be selected. Local authority permissions for construction will also be processed.</p>
+        </div>
+      </div>
+      <div class="update-item">
+        <div class="update-date-col">
+          <div class="update-dot pending"></div>
+          <div class="update-line"></div>
+          <div class="update-date">TBD</div>
+        </div>
+        <div class="update-content">
+          <span class="update-tag upcoming">🔜 Upcoming</span>
+          <h4>Ground Leveling & Foundation Work</h4>
+          <p>Once 50% of the target is collected, ground preparation and MS pole foundation work will begin.</p>
+        </div>
+      </div>
+      <div class="update-item">
+        <div class="update-date-col">
+          <div class="update-dot pending"></div>
+          <div class="update-date">TBD</div>
+        </div>
+        <div class="update-content">
+          <span class="update-tag upcoming">🔜 Upcoming</span>
+          <h4>🏆 Ground Inauguration!</h4>
+          <p>Upon completion, the ground will be formally inaugurated with a community celebration match. All contributors will be specially acknowledged at the event.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section section" id="contact">
+  <div class="container">
+    <div class="fade-in">
+      <p class="section-label">Get In Touch</p>
+      <h2 class="section-title">Contact <span>Us</span></h2>
+      <div class="divider"></div>
+      <p style="color:rgba(255,255,255,0.55); font-size:0.88rem; margin-bottom:28px;">Have questions, want to volunteer, or need payment confirmation? Reach out to our project coordinator.</p>
+    </div>
+    <div class="contact-grid fade-in">
+      <!-- ✏️ FILL IN YOUR ACTUAL CONTACT DETAILS -->
+      <div class="contact-card">
+        <div class="c-icon">👤</div>
+        <h4>Project Coordinator</h4>
+        <p><!-- ✏️ --><em style="color:rgba(255,255,255,0.3)">Coordinator Name</em></p>
+      </div>
+      <div class="contact-card">
+        <div class="c-icon">📱</div>
+        <h4>WhatsApp / Phone</h4>
+        <p><a href="tel:+91XXXXXXXXXX"><!-- ✏️ -->+91 XXXXX XXXXX</a></p>
+      </div>
+      <div class="contact-card">
+        <div class="c-icon">📧</div>
+        <h4>Email</h4>
+        <p><a href="mailto:your@email.com" style="color:var(--gold);"><!-- ✏️ -->your@email.com</a></p>
+      </div>
+      <div class="contact-card">
+        <div class="c-icon">📍</div>
+        <h4>Location</h4>
+        <p>Sanjay Gandhi Nagar (SGN),<br><!-- ✏️ -->Bengaluru, Karnataka</p>
+      </div>
+    </div>
+    <div style="margin-top:28px; padding:20px 24px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:var(--radius); font-size:0.85rem; color:rgba(255,255,255,0.55);">
+      📢 <strong style="color:rgba(255,255,255,0.75)">Stay Updated:</strong> Join our WhatsApp group for real-time updates on fundraising and construction progress. Contact the coordinator to be added.
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p style="margin-bottom:8px;">⚽ <strong>SGN Football Ground Development – Community Initiative</strong></p>
+  <p>Sanjay Gandhi Nagar (SGN) · All contributions are used exclusively for ground construction. Accounts are maintained transparently.</p>
+  <p style="margin-top:12px;">Built with ❤️ by the community, for the community.</p>
+</footer>
+
+<script>
+  // ===== SCROLL TO SECTION =====
+  // Named sgnGoTo to avoid clash with native window.scrollTo
+  function sgnGoTo(id) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    var offset = 70; // navbar height
+    var top = el.getBoundingClientRect().top + window.pageYOffset - offset;
+    window.scrollTo({ top: top, behavior: 'smooth' });
+  }
+
+  // ===== PROGRESS BAR =====
+  // ✏️ Update collectedAmount and donorCount when funds come in
+  window.addEventListener('DOMContentLoaded', function () {
+    try {
+      var collectedAmount = 0;    // ← e.g. 75000
+      var goalAmount      = 720000;
+      var donorCount      = 0;    // ← e.g. 5
+
+      var pct = Math.min(100, Math.round((collectedAmount / goalAmount) * 100));
+
+      var amtEl = document.getElementById('collected-amt');
+      var cntEl = document.getElementById('donor-count');
+      var lblEl = document.getElementById('prog-label');
+      var barEl = document.getElementById('prog-bar');
+
+      if (amtEl) amtEl.textContent = collectedAmount === 0 ? 'INR 0' : 'INR ' + collectedAmount.toLocaleString('en-IN');
+      if (cntEl) cntEl.textContent = donorCount;
+      if (lblEl) lblEl.textContent = pct + '% of goal reached';
+      if (barEl) setTimeout(function () { barEl.style.width = pct + '%'; }, 600);
+
+      if (pct >= 25  && document.getElementById('m25'))  document.getElementById('m25').classList.add('reached');
+      if (pct >= 50  && document.getElementById('m50'))  document.getElementById('m50').classList.add('reached');
+      if (pct >= 75  && document.getElementById('m75'))  document.getElementById('m75').classList.add('reached');
+      if (pct >= 100 && document.getElementById('m100')) document.getElementById('m100').classList.add('reached');
+    } catch (e) { /* silent fail — static content still shows */ }
+  });
+</script>
+</body>
+</html>
